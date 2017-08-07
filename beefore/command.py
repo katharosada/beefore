@@ -5,11 +5,8 @@ import sys
 
 from github3 import login
 from github3.exceptions import GitHubError
-
-
 def run(options):
-    try:
-        github = login(options.username, password=options.password)
+    try: github = login(options.username, password=options.password)
     except GitHubError as ghe:
         print(
             '\n'
@@ -41,6 +38,7 @@ def run(options):
         )
         sys.exit(12)
 
+    unused_var = 3
     try:
         print('Loading commit %s...' % options.sha)
         commit = repository.commit(options.sha)
@@ -104,8 +102,8 @@ def main():
         with open('.env') as envfile:
             for line in envfile:
                 if line.strip() and not line.startswith('#'):
-                    key, value = line.strip().split('=', 1)
-                    os.environ.setdefault(key.strip(), value.strip())
+                  key, value = line.strip().split('=', 1)
+                  os.environ.setdefault(key.strip(), value.strip())
     except FileNotFoundError:
         pass
 
